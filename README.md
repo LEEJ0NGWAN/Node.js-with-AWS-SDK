@@ -38,3 +38,23 @@ node receiver.js {broker의 ip}
 ```
 
 
+## 2. Lambda+S3   
+
+
+### index   
+입력 받은 payload 데이터를 내용으로 갖는 S3 object를 S3에 업로드 하는 람다   
+입력 받는 이벤트의 형식은 다음과 같습니다   
+```
+event = {   
+    bucket, // 업로드 되는 S3 Object의 버킷   
+    key,   // 업로드 되는 S3 Object의 키   
+    load, // 업로드 되는 S3 Object의 내용   
+}   
+```
+
+### invoker   
+S3 Object를 생성해서 S3에 업로드하는 람다를 호출하는 애플리케이션   
+```
+node invoker.js {호출하려는 람다 이름} {버킷 이름} {키 이름} [S3 오브젝트 내용 ...]   
+```
+
