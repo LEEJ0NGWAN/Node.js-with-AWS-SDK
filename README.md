@@ -58,3 +58,9 @@ S3 Object를 생성해서 S3에 업로드하는 람다를 호출하는 애플리
 node invoker.js {호출하려는 람다 이름} {버킷 이름} {키 이름} [S3 오브젝트 내용 ...]   
 ```
 
+
+## 3. FRLS (Face Recognition Lambda Service)   
+
+
+### design   
+![Alt text](/3.FRLS/design.png)   
