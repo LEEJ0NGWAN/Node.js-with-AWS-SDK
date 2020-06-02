@@ -64,3 +64,30 @@ node invoker.js {호출하려는 람다 이름} {버킷 이름} {키 이름} [S3
 
 ### design   
 ![Alt text](/3.FRLS/design.png)   
+
+### index   
+입력 받은 payload의 키값을 파일이름으로 하는 이미지 S3 오브젝트와 참조 대상이 되는 이미지 S3 오브젝트를 비교하기 위해 AWS Face Rekognition으로 요청을 보내는 람다   
+입력 받는 이벤트의 형식은 다음과 같습니다   
+```
+event = {
+    id, // 비교 대상이 되는 인물의 이미지 S3 오브젝트 키값(파일이름)   
+}
+```
+얼굴 비교 결과를 faceRecog/notify/door1 토픽으로 publish합니다   
+publish하는 객체의 형식은 다음과 같습니다   
+```
+{
+    image: 일치하는 이미지 이름 || unknown(일치하는 참조 대상이 없을 경우),   
+    command: unlock || lock,   
+}
+```
+
+### doorCamera   
+비교하고자 하는 이미지 파일을 S3 오브젝트로 업로드하고 faceRecog/request 토픽으로 publish하는 애플리케이션   
+```
+node doorCamera.js {이미지 파일}
+```
+
+### doorLock   
+faceRecog/notify/door1 토픽을 subscribe하는 애플리케이션   
+command에 따라 unlock 또는 lock을 출력   
