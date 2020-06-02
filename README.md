@@ -65,7 +65,7 @@ node invoker.js {호출하려는 람다 이름} {버킷 이름} {키 이름} [S3
 ### design   
 ![Alt text](/3.FRLS/design.png)   
 
-### index   
+### FRLS   
 입력 받은 payload의 키값을 파일이름으로 하는 이미지 S3 오브젝트와 참조 대상이 되는 이미지 S3 오브젝트를 비교하기 위해 AWS Face Rekognition으로 요청을 보내는 람다   
 입력 받는 이벤트의 형식은 다음과 같습니다   
 ```
